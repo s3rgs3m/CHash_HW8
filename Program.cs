@@ -38,3 +38,42 @@
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
+
+int[,] getArr(int m, int n){
+    Random rnd = new Random();
+    int[,] arr = new int[m,n];
+    for (int i=0; i<m; i++)
+        for (int j=0; j<n; j++)
+            arr[i,j] = rnd.Next(0,10);
+    return arr;
+}
+Console.Clear();
+Console.WriteLine("Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.");
+Console.Write("\tИсходный массив:");
+
+int [,] arr = getArr(3,4); // задаем массив
+int M = arr.GetUpperBound(0)+1;
+int N = arr.GetUpperBound(1)+1;
+
+for (int i=0; i < M; i++){
+    Console.Write("\n\t");
+    for (int j=0; j < N ; j++)
+        Console.Write($"\t{arr[i,j]}");
+}
+
+int tmp;
+for (int i=0; i < M; i++)
+    for (int j=0; j<N-1;j++)
+        for (int t=j+1; t<N;t++)
+            if (arr[i,j] < arr[i,t]){
+                tmp = arr[i,j];
+                arr[i,j] = arr[i,t];
+                arr[i,t] = tmp;
+            }
+
+Console.Write("\n\tСортированный массив:");
+for (int i=0; i < M; i++){
+    Console.Write("\n\t");
+    for (int j=0; j < N ; j++)
+        Console.Write($"\t{arr[i,j]}");
+}
