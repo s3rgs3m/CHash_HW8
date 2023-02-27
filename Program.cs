@@ -101,7 +101,7 @@ for (int i=0; i<M; i++){
 }
 Console.WriteLine($"\n\tСтрока с наименьшей суммой: {minSumIndex}");
 
-Console.WriteLine("Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.");
+Console.WriteLine("\nЗадача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.");
 int [,] arr1 = getArr(2,3); // матрица 1
 int M1 = arr1.GetUpperBound(0)+1; 
 int N1 = arr1.GetUpperBound(1)+1; 
@@ -123,5 +123,43 @@ for (int i=0; i<M1; i++)
             arr3[i,j] = arr3[i,j] + arr1[i,z]*arr2[z,j];
     }
 
-Console.WriteLine("\nРезультат умножения:");
+Console.Write("\n\tРезультат умножения:");
 viewArr(arr3,M1,N2);
+
+Console.WriteLine("\n\nЗадача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.");
+int[,,] arr60 = new int[3,3,3];
+int X = arr60.GetUpperBound(0)+1;
+int Y = arr60.GetUpperBound(1)+1;
+int Z = arr60.GetUpperBound(2)+1;
+
+// инициализация массива начальными значеними, несовпадающими с теми, которыми заполнится [10;99]
+for (int i=0; i<X; i++)
+    for (int j=0; j<Y; j++)
+        for (int z=0; z<Z; z++)
+            arr60[i,j,z] = 0;
+
+// поиск повторений чисел по массиву
+bool found (int[,,] arr, int num){
+    for (int i=0; i<X; i++)
+        for (int j=0; j<Y; j++)
+            for (int z=0; z<Z; z++)
+                if (arr[i,j,z] == num)
+                    return true;
+
+    return false;
+}
+
+// заполнение и вывод
+Random rnd = new Random();
+tmp = rnd.Next(10,100);
+Console.Write("\tПолученный массив:");
+for (int i=0; i< X; i++){
+    Console.Write("\n");
+    for (int j=0; j< Y; j++){
+        for (int z=0; z<Z; z++){
+            while (found(arr60, tmp))
+                tmp = rnd.Next(10,100);
+            arr60[i,j,z] = tmp;
+            Console.Write($"\t{arr60[i,j,z]} ({i},{j},{z})");
+        }
+}
