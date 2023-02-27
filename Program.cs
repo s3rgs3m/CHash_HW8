@@ -155,7 +155,7 @@ tmp = rnd.Next(10,100);
 Console.Write("\tПолученный массив:");
 for (int i=0; i< X; i++){
     Console.Write("\n");
-    for (int j=0; j< Y; j++){
+    for (int j=0; j< Y; j++)
         for (int z=0; z<Z; z++){
             while (found(arr60, tmp))
                 tmp = rnd.Next(10,100);
