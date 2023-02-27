@@ -100,3 +100,28 @@ for (int i=0; i<M; i++){
     }
 }
 Console.WriteLine($"\n\tСтрока с наименьшей суммой: {minSumIndex}");
+
+Console.WriteLine("Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.");
+int [,] arr1 = getArr(2,3); // матрица 1
+int M1 = arr1.GetUpperBound(0)+1; 
+int N1 = arr1.GetUpperBound(1)+1; 
+int [,] arr2 = getArr(3,4); // матрица 2 Произведение двух матриц АВ имеет смысл только в том случае, когда число столбцов матрицы А совпадает с числом строк матрицы В .
+int M2 = arr2.GetUpperBound(0)+1; 
+int N2 = arr2.GetUpperBound(1)+1; 
+
+Console.Write("\tМатрица A:");
+viewArr(arr1,M1,N1);
+Console.Write("\n\tМатрица B:");
+viewArr(arr2,M2,N2);
+
+int [,] arr3 = new int[M1,N2]; //матрица результата
+
+for (int i=0; i<M1; i++)
+    for (int j=0; j<N2; j++){
+        arr3[i,j] = 0;
+        for (int z=0; z<N1 ; z++)
+            arr3[i,j] = arr3[i,j] + arr1[i,z]*arr2[z,j];
+    }
+
+Console.WriteLine("\nРезультат умножения:");
+viewArr(arr3,M1,N2);
