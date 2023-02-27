@@ -39,7 +39,7 @@
 // 11 16 15 06
 // 10 09 08 07
 
-int[,] getArr(int m, int n){
+int[,] getArr(int m, int n){ // заполнение массива
     Random rnd = new Random();
     int[,] arr = new int[m,n];
     for (int i=0; i<m; i++)
@@ -47,21 +47,25 @@ int[,] getArr(int m, int n){
             arr[i,j] = rnd.Next(0,10);
     return arr;
 }
+
+void viewArr(int[,] arr, int M, int N){ // вывод массива
+    for (int i=0; i < M; i++){
+        Console.Write("\n\t");
+        for (int j=0; j < N ; j++)
+            Console.Write($"\t{arr[i,j]}");
+    }
+}
 Console.Clear();
 Console.WriteLine("Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.");
-Console.Write("\tИсходный массив:");
 
 int [,] arr = getArr(3,4); // задаем массив
-int M = arr.GetUpperBound(0)+1;
-int N = arr.GetUpperBound(1)+1;
+int M = arr.GetUpperBound(0)+1; // получаем размерность - строки
+int N = arr.GetUpperBound(1)+1; // получаем размерность - стролбики
 
-for (int i=0; i < M; i++){
-    Console.Write("\n\t");
-    for (int j=0; j < N ; j++)
-        Console.Write($"\t{arr[i,j]}");
-}
+Console.Write("\tИсходный массив:");
+viewArr(arr,M,N);
 
-int tmp;
+int tmp; // сортировка
 for (int i=0; i < M; i++)
     for (int j=0; j<N-1;j++)
         for (int t=j+1; t<N;t++)
@@ -72,8 +76,27 @@ for (int i=0; i < M; i++)
             }
 
 Console.Write("\n\tСортированный массив:");
-for (int i=0; i < M; i++){
-    Console.Write("\n\t");
-    for (int j=0; j < N ; j++)
-        Console.Write($"\t{arr[i,j]}");
+viewArr(arr,M,N);
+
+Console.WriteLine("\n\nЗадача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.");
+arr = getArr(3,3); 
+M = arr.GetUpperBound(0)+1;
+N = arr.GetUpperBound(1)+1;
+
+Console.Write("\tИсходный массив:");
+viewArr(arr,M,N);
+
+int sum; // сумма в текущей строке
+int minSum = 0; // текущая наименьшая сумма
+int minSumIndex = 0; // строка с наименьшей суммой
+
+for (int i=0; i<M; i++){
+    sum = 0;
+    for (int j=0; j<N; j++)
+        sum+=arr[i,j];
+    if (sum < minSum || i==0){
+        minSum = sum;
+        minSumIndex = i+1;
+    }
 }
+Console.WriteLine($"\n\tСтрока с наименьшей суммой: {minSumIndex}");
